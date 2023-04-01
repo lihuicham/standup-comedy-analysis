@@ -3,4 +3,3 @@ matplotlib
 plotly
 textblob
 wordcloud
-streamlit
