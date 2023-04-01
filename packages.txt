@@ -1,5 +1,0 @@
-pandas-dev
-matplotlib-dev
-plotly-dev
-textblob-dev
-wordcloud-dev
