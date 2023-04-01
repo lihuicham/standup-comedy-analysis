@@ -17,7 +17,7 @@ We collected the data via web scraping. We scraped the a standup comedy transcri
 The initial columns that we obtained are `Comedian`, `Date`, `Title`, `Subtitle` and `Transcript`. All variables are of type `string`. 
 '''
 
-df = pd.read_csv('/Users/lihuicham/Desktop/Y2S2/BT4222/project/standup-comedy-analysis/main/transcripts.csv')
+df = pd.read_csv('/Users/lihuicham/Desktop/Y2S2/BT4222/project/standup-comedy-analysis/transcripts.csv')
 df = df[df.columns[1:]]
 st.dataframe(df.head())
 
