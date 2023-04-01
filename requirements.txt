@@ -3,5 +3,4 @@ matplotlib
 plotly
 textblob
 wordcloud
-pickle
 streamlit
