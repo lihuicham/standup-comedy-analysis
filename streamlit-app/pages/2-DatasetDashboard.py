@@ -3,6 +3,14 @@ import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
+import re
+import string
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords 
+from nltk.stem import WordNetLemmatizer 
+from nltk.stem import PorterStemmer
+from nltk.corpus import wordnet
 
 '''
 # Dataset Dashboard 
@@ -35,16 +43,100 @@ col2.metric("Number of Variables", "5")
 
 '''
 
+# pos tagging -> lemmitization 
+def pos_then_lemmatize(pos_tagged_words) :
+    res = []
+    for pos in pos_tagged_words : 
+        word = pos[0]
+        pos_tag = pos[1]
+        lemmatizer = WordNetLemmatizer()
+        lem = lemmatizer.lemmatize(word, get_wordnet_pos(pos_tag))
+        res.append(lem)
+    return res
+
+
+
+def filtering(sent) : 
+    sent = sent.lower()
+    sent = re.sub('\[.*?\]', '', sent)   
+    sent = re.sub('[%s]' % re.escape(string.punctuation), '', sent)
+    sent = re.sub('\w*\d\w*', '', sent) 
+    sent = re.sub('[‘’“”…]', '', sent)
+    sent = re.sub('\n', '', sent)
+    words = word_tokenize(sent)
+    stop_words = set(stopwords.words('english')) 
+    filtered_words = [w for w in words if not w in stop_words]
+    return filtered_words
+
+def lemmatize(filtered_words) : 
+    lemmatizer = WordNetLemmatizer()
+    lemmatized_words = [lemmatizer.lemmatize(word) for word in filtered_words]
+    return lemmatized_words
+
+def stemming(filtered_words) : 
+    stemmer = PorterStemmer()
+    stemmed_words = [stemmer.stem(word) for word in filtered_words]
+    return stemmed_words
+
+def pos(filtered_words) : 
+    pos_tagged_words = nltk.pos_tag(filtered_words)
+    return pos_tagged_words
+
+def pos_lemmatize(filtered_words) : 
+    pos_tagged_words = nltk.pos_tag(filtered_words)
+    pos_lemmatized_words = pos_then_lemmatize(pos_tagged_words)
+    return pos_lemmatized_words
+
+def join_words(words) : 
+    return ', '.join(words)
+
+
+
 '''
 #### Extra 1 : Stemming vs Lemmatization
 Why do we choose lemmitization over stemming ?  
 Let's explain with one simple sentence. 
 '''
 
+st.code('Follows Papa as he shares about parenting his reliance on modern technology rescuing his pet pug and how his marriage has evolved over time.')
+
+sentence = st.text_input('Input a sentence or copy from above.')
+filtered_words = filtering(sentence)
+
+st.markdown('**Lemmatization :**')
+st.write(join_words(lemmatize(filtered_words)))
+
+st.markdown('**Stemming :**')
+st.write(join_words(stemming(filtered_words)))
+
+st.markdown('*From above comparison betweeen lemmitization and stemming, we can clearly see that the words obtained from stemming doesn\'t make sense. This is because stemming **overtruncates** words due to its simplicity to return the root form of a word.*')
 '''
-#### Extra 2 : How we lemmatize based on parts-of-speech ?  
+#### Extra 2 : How do we lemmatize based on parts-of-speech ?  
+'''
+# define a helper function to map the pos tag to wordnet 
+with st.echo() : 
+    def get_wordnet_pos(treebank_tag) : 
+        if treebank_tag.startswith('J'):
+            return wordnet.ADJ
+        elif treebank_tag.startswith('V'):
+            return wordnet.VERB
+        elif treebank_tag.startswith('N'):
+            return wordnet.NOUN
+        elif treebank_tag.startswith('R'):
+            return wordnet.ADV
+        else:
+            # As default pos in lemmatization is Noun
+            return wordnet.NOUN
+
+'''
 Reusing the simple sentence from Extra 1. 
 '''
+
+st.markdown('**Parts-of-Speech Tags :**')
+st.write(pd.DataFrame(pos(filtered_words), columns=['word', 'pos tags']).transpose())
+
+st.markdown('**POS then Lemmatize :**')
+st.write(join_words(pos_lemmatize(filtered_words)))
 
 '''
 ## Data Organization 
