@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd 
 import plotly.express as px
 from textblob import TextBlob
-
+from empath import Empath
 
 '''
 # Sentiment Analysis Dashboard
@@ -58,4 +58,5 @@ fig_scatter.update_layout(
     yaxis_title="<-- Facts -------- Opinions -->",
 )
 st.plotly_chart(fig_scatter)
+
 
