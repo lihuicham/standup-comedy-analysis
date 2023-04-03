@@ -24,7 +24,7 @@ xgb_roc_fig = pd.read_pickle('/Users/lihuicham/Desktop/Y2S2/BT4222/project/stand
 
 
 option = st.selectbox(
-    'ROC Curves of Different Models',
+    'Area Under Curve (AUC) of Different Models\' ROC',
     ('Multinomial Naive Bayes Model', 
      'Logistic Regression Model',
      'Random Forest Model',

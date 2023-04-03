@@ -185,6 +185,9 @@ wc = WordCloud().generate_from_frequencies(tf_matrix[transcript_num])
 fig_wc1, ax = plt.subplots(figsize = (12, 8))
 ax.imshow(wc)
 plt.axis("off")
+
+st.write('You are viewing transcript ', transcript_num)
+st.write(df.loc[df.index[transcript_num]])
 st.pyplot(fig_wc1)
 
 
