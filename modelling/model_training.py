@@ -8,7 +8,7 @@ from utils import *
 
 data = pd.read_csv("transcripts.csv", index_col = 0)
 
-with open("sample.txt", "r") as f:
+with open("user_transcript.txt", "r") as f:
     sample = "".join(f.readlines())
 
 print("## Data Preprocessing")
