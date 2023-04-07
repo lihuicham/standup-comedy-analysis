@@ -71,5 +71,8 @@ model.fit(train_vec, y_train)
 y_prob = model.predict_proba(train_vec)
 evaluate_cnfm_roc(y_train, y_prob, label = "Random Forest Training")
 
+y_prob = model.predict_proba(test_vec)
+evaluate_cnfm_roc(y_test, y_prob, label = "Random Forest Test")
+
 import pickle
 pickle.dump(model, open("trained_model", "wb"))
