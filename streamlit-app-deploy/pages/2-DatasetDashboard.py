@@ -25,7 +25,7 @@ We collected the data via web scraping. We scraped the a standup comedy transcri
 The initial columns that we obtained are `Comedian`, `Date`, `Title`, `Subtitle` and `Transcript`. All variables are of type `string`. 
 '''
 
-df = pd.read_csv('standup-comedy-analysis/main/transcripts.csv')
+df = pd.read_csv('main/transcripts.csv')
 df = df[df.columns[1:]]
 st.dataframe(df.head())
 
@@ -158,7 +158,7 @@ With more accurate predictions and more meaningful words, we chose the document-
 # EDA 1
 st.markdown('#### Most Common Words')
 
-most_common_words_complete = pd.read_pickle('standup-comedy-analysis/st-files-dashboard/mostcommonwords-st.pkl')
+most_common_words_complete = pd.read_pickle('st-files-dashboard/mostcommonwords-st.pkl')
 most_common_words = [(word, freq) for word, freq in most_common_words_complete if freq >= 150]
 most_common_words_df = pd.DataFrame(most_common_words, columns = ['word' , 'count'])
 

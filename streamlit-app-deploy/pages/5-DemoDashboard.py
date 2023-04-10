@@ -137,14 +137,14 @@ user_input = st.text_area('Input the comedy transcript you would like to predict
 st.markdown('**Press `ctrl/cmd + enter` to process input transcript for next step.**')
 st.markdown('*Note: There will be a SMOTE error below if you do not fill in the input script above !*')
 
-valid_transcripts_sent_df = pd.read_pickle('standup-comedy-analysis/main/chloe_valid_transcripts_sent_df')
-valid_transcripts_df = pd.read_pickle('standup-comedy-analysis/main/valid_transcripts_df')
+valid_transcripts_sent_df = pd.read_pickle('main/chloe_valid_transcripts_sent_df')
+valid_transcripts_df = pd.read_pickle('main/valid_transcripts_df')
 filtered_transcripts_df = filter_by_sentiment(valid_transcripts_df, user_input)
 filtered_transcripts_sent_df = valid_transcripts_sent_df[valid_transcripts_sent_df['Title'].isin(filtered_transcripts_df['Title'])]
 
-full_grad_clf = pd.read_pickle('standup-comedy-analysis/main/trained_grad_model')
-full_vectorizer = pd.read_pickle('standup-comedy-analysis/main/full_vectorizer')
-full_features = pd.read_pickle('standup-comedy-analysis/main/full_features')
+full_grad_clf = pd.read_pickle('main/trained_grad_model')
+full_vectorizer = pd.read_pickle('main/full_vectorizer')
+full_features = pd.read_pickle('main/full_features')
 
 filtered_tfidf_matrix = full_vectorizer.transform(filtered_transcripts_sent_df['Processed Transcript'])
 X_train_filtered = pd.DataFrame(filtered_tfidf_matrix.toarray(), columns = full_vectorizer.get_feature_names_out())

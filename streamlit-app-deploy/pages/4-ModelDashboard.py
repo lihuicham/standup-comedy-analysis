@@ -9,19 +9,19 @@ We trained `MultinomialNB`, `Logistic Regression`, `Random Forest`, `Adaboost`,
 between models. 
 '''
 
-model_perf_df = pd.read_pickle('standup-comedy-analysis/main/model_performance_df')
+model_perf_df = pd.read_pickle('main/model_performance_df')
 st.dataframe(model_perf_df)
 
 '''
 ## ROC Curves
 '''
-nb_roc_fig = pd.read_pickle('standup-comedy-analysis/main/nb_roc_fig')
-logreg_roc_fig = pd.read_pickle('standup-comedy-analysis/main/logreg_roc_fig')
-rf_roc_fig = pd.read_pickle('standup-comedy-analysis/main/rf_roc_fig')
-ada_roc_fig = pd.read_pickle('standup-comedy-analysis/main/ada_roc_fig')
-grad_roc_fig = pd.read_pickle('standup-comedy-analysis/main/grad_roc_fig')
-xgb_roc_fig = pd.read_pickle('standup-comedy-analysis/main/xgb_roc_fig')
-vote_roc_fig = pd.read_pickle('standup-comedy-analysis/main/vote_roc_fig')
+nb_roc_fig = pd.read_pickle('main/nb_roc_fig')
+logreg_roc_fig = pd.read_pickle('main/logreg_roc_fig')
+rf_roc_fig = pd.read_pickle('main/rf_roc_fig')
+ada_roc_fig = pd.read_pickle('main/ada_roc_fig')
+grad_roc_fig = pd.read_pickle('main/grad_roc_fig')
+xgb_roc_fig = pd.read_pickle('main/xgb_roc_fig')
+vote_roc_fig = pd.read_pickle('main/vote_roc_fig')
 
 
 option = st.selectbox(
