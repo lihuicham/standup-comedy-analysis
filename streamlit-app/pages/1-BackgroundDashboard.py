@@ -2,7 +2,11 @@ import streamlit as st
 import pandas as pd 
 import plotly.express as px
 
-df = pd.read_csv('/Users/lihuicham/Documents/GitHub/standup-comedy-analysis/main/transcripts.csv')
+@st.cache
+def load_df():
+	  return pd.read_csv('/Users/lihuicham/Documents/GitHub/standup-comedy-analysis/main/transcripts.csv')
+
+df = load_df()
 df = df[df.columns[1:]]
 
 # create a word count column

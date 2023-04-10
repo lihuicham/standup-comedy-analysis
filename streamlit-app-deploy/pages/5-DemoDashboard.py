@@ -140,14 +140,34 @@ user_input = ' '.join(user_input.split('\n'))
 st.markdown('**Press `ctrl/cmd + enter` to process input transcript for next step.**')
 st.markdown('*Note: There will be a SMOTE error below if you do not fill in the input script above !*')
 
-valid_transcripts_sent_df = pd.read_pickle('main/chloe_valid_transcripts_sent_df')
-valid_transcripts_df = pd.read_pickle('main/valid_transcripts_df')
+@st.cache
+def load_sent() :
+    return pd.read_pickle('main/chloe_valid_transcripts_sent_df')
+
+@st.cache
+def load_df() :
+    return pd.read_pickle('main/valid_transcripts_df')
+
+valid_transcripts_sent_df = load_sent()
+valid_transcripts_df = load_df()
 filtered_transcripts_df = filter_by_sentiment(valid_transcripts_df, user_input)
 filtered_transcripts_sent_df = valid_transcripts_sent_df[valid_transcripts_sent_df['Title'].isin(filtered_transcripts_df['Title'])]
 
-full_grad_clf = pd.read_pickle('main/trained_grad_model')
-full_vectorizer = pd.read_pickle('main/full_vectorizer')
-full_features = pd.read_pickle('main/full_features')
+@st.cache
+def load_grad() :
+    return pd.read_pickle('main/trained_grad_model')
+
+@st.cache
+def load_vectorizer() :
+    return pd.read_pickle('main/full_vectorizer')
+
+@st.cache
+def load_features() :
+    return pd.read_pickle('main/full_features')
+
+full_grad_clf = load_grad()
+full_vectorizer = load_vectorizer()
+full_features = load_features()
 
 filtered_tfidf_matrix = full_vectorizer.transform(filtered_transcripts_sent_df['Processed Transcript'])
 X_train_filtered = pd.DataFrame(filtered_tfidf_matrix.toarray(), columns = full_vectorizer.get_feature_names_out())

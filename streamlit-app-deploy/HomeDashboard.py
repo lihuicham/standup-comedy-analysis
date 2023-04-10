@@ -1,14 +1,11 @@
 import streamlit as st
-
 '''
 # BT4222 Final Project 
 ## Stand-up Comedy Analysis 
 
 ### Links : 
 [GitHub Repo & Code](https://github.com/lihuicham/standup-comedy-analysis)  
-[Streamlit Dashboard App]()  
-[Final Project Report]()  
-[Presentation Slides]()  
+[Streamlit Dashboard App](https://lihuicham-standup-come-streamlit-app-deployhomedashboard-7433vq.streamlit.app/)  
 
 ### Contributors 
 [Cham Li Hui (@lihuicham)](https://github.com/lihuicham)  

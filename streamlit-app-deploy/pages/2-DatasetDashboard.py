@@ -26,7 +26,11 @@ We collected the data via web scraping. We scraped the a standup comedy transcri
 The initial columns that we obtained are `Comedian`, `Date`, `Title`, `Subtitle` and `Transcript`. All variables are of type `string`. 
 '''
 
-df = pd.read_csv('main/transcripts.csv')
+@st.cache
+def load_df() :
+    return pd.read_csv('main/transcripts.csv')
+
+df = load_df()
 df = df[df.columns[1:]]
 st.dataframe(df.head())
 
@@ -159,7 +163,11 @@ With more accurate predictions and more meaningful words, we chose the document-
 # EDA 1
 st.markdown('#### Most Common Words')
 
-most_common_words_complete = pd.read_pickle('st-files-dashboard/mostcommonwords-st.pkl')
+@st.cache
+def load_most() :
+    return pd.read_pickle('st-files-dashboard/mostcommonwords-st.pkl')
+
+most_common_words_complete = load_most()
 most_common_words = [(word, freq) for word, freq in most_common_words_complete if freq >= 150]
 most_common_words_df = pd.DataFrame(most_common_words, columns = ['word' , 'count'])
 
@@ -176,8 +184,15 @@ st.plotly_chart(fig_most_common)
 st.markdown('#### Word Cloud')
 st.markdown('Transcripts are cleaned, no stopwords, no most common words and etc. Word cloud should be meaningful')
 
-sparse_tf_stop = pd.read_pickle('st-files-dashboard/sparse_tf_stop.pkl')
-tf_colnames = pd.read_pickle('st-files-dashboard/tf_colnames.pkl')
+@st.cache
+def load_sparse() :
+    return pd.read_pickle('st-files-dashboard/sparse_tf_stop.pkl')
+sparse_tf_stop = load_sparse()
+
+@st.cache
+def load_tf() :
+    return pd.read_pickle('st-files-dashboard/tf_colnames.pkl')
+tf_colnames = load_tf()
 tf_matrix = pd.DataFrame(sparse_tf_stop.toarray(), columns=tf_colnames)
 tf_matrix = tf_matrix.transpose()
 
