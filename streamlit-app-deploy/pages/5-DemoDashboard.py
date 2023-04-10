@@ -139,7 +139,7 @@ user_input = st.text_area('Input the comedy transcript you would like to predict
 user_input = ' '.join(user_input.split('\n'))
 st.markdown('**Press `ctrl/cmd + enter` to process input transcript for next step.**')
 st.markdown('*Note: The warning below is a caching warning from the deployment app, you can ignore it.*')
-st.markdown('**Another Note : There will be a SMOTE error below and you cannot see other steps of this dashboard if you do not fill in the input script above !**')
+st.markdown('**Another Note : There will be an error below and you cannot see other steps of this dashboard if you do not fill in the input script above !**')
 
 @st.cache
 def load_sent() :

@@ -1,4 +1,11 @@
 import streamlit as st
+from PIL import Image
+
+image = Image.open('image.jpeg')
+
+st.image(image, caption='Stand-up Comedy Analysis')
+
+
 '''
 # BT4222 Final Project 
 ## Stand-up Comedy Analysis 
