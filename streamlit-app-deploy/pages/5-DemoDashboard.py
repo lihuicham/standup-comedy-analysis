@@ -13,6 +13,7 @@ import numpy as np
 from imblearn.over_sampling import SMOTE
 import nltk 
 nltk.download('punkt')
+nltk.download('stopwords')
 
 ## helper functions from pipeline_functions.py
 def clean_text(text) :
