@@ -3,13 +3,10 @@ from PIL import Image
 
 image = Image.open('image.jpeg')
 
+st.markdown('# BT4222 Final Project') 
 st.image(image, caption='Stand-up Comedy Analysis')
 
-
 '''
-# BT4222 Final Project 
-## Stand-up Comedy Analysis 
-
 ### Links : 
 [GitHub Repo & Code](https://github.com/lihuicham/standup-comedy-analysis)  
 [Streamlit Dashboard App](https://lihuicham-standup-come-streamlit-app-deployhomedashboard-7433vq.streamlit.app/)  
