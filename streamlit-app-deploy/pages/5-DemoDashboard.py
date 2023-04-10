@@ -140,6 +140,7 @@ user_input = ' '.join(user_input.split('\n'))
 st.markdown('**Press `ctrl/cmd + enter` to process input transcript for next step.**')
 st.markdown('*Note: The warning below is a caching warning from the deployment app, you can ignore it.*')
 st.markdown('**Another Note : There will be an error below and you cannot see other steps of this dashboard if you do not fill in the input script above !**')
+st.markdown('Another another note : This multiline text area needs ctrl/cmd + enter to run, so it can only work on laptops, not mobile phones :(')
 
 @st.cache
 def load_sent() :
