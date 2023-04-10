@@ -3,3 +3,12 @@ matplotlib
 plotly
 textblob
 wordcloud
+empath
+textblob
+sklearn.ensemble
+numpy
+imblearn.over_sampling
+nltk
+nltk.tokenize
+nltk.corpus
+nltk.stem  
