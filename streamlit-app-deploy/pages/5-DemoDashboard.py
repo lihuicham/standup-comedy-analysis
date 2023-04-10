@@ -136,6 +136,7 @@ def preprocess(doc):
 st.markdown('## Step 1 : User Input Transcript')
 st.markdown('Copy sample transcript [here](https://github.com/lihuicham/standup-comedy-analysis/blob/main/main/sample.txt). You can click the copy icon to copy the text !')
 user_input = st.text_area('Input the comedy transcript you would like to predict :', height=300)
+user_input = ' '.join(user_input.split('\n'))
 st.markdown('**Press `ctrl/cmd + enter` to process input transcript for next step.**')
 st.markdown('*Note: There will be a SMOTE error below if you do not fill in the input script above !*')
 
