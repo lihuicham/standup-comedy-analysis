@@ -9,5 +9,3 @@ scikit-learn
 numpy
 imblearn
 nltk
-nltk.stem
-nltk.corpus
