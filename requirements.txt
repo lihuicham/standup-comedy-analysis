@@ -5,10 +5,8 @@ textblob
 wordcloud
 empath
 textblob
-sklearn.ensemble
+scikit-learn
 numpy
-imblearn.over_sampling
+imblearn
 nltk
-nltk.tokenize
-nltk.corpus
-nltk.stem  
+
