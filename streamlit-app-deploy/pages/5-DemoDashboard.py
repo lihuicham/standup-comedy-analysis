@@ -10,7 +10,7 @@ import re
 from sklearn.ensemble import GradientBoostingClassifier
 from empath import Empath
 import numpy as np
-from imblearn.over_sampling import SMOTE
+from imblearn.over_sampling import RandomOverSampler
 import nltk 
 nltk.download('all')
 
@@ -154,8 +154,8 @@ X_train_filtered = pd.DataFrame(filtered_tfidf_matrix.toarray(), columns = full_
 X_train_filtered = X_train_filtered[full_features]
 y_train_filtered = filtered_transcripts_sent_df['Funniness']
 
-smote = SMOTE(k_neighbors = 1)
-X_train_sm, y_train_sm = smote.fit_resample(X_train_filtered, y_train_filtered)
+oversampler = RandomOverSampler(sampling_strategy = 'minority')
+X_train_sm, y_train_sm = oversampler.fit_resample(X_train_filtered, y_train_filtered)
 
 filtered_grad_clf = GradientBoostingClassifier(n_estimators = 40, learning_rate = 0.1, random_state = 0).fit(X_train_sm, y_train_sm)
 

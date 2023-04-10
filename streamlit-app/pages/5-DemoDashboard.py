@@ -10,7 +10,7 @@ import re
 from sklearn.ensemble import GradientBoostingClassifier
 from empath import Empath
 import numpy as np
-from imblearn.over_sampling import SMOTE
+from imblearn.over_sampling import RandomOverSampler
 
 ## helper functions from pipeline_functions.py
 def clean_text(text) :
@@ -135,6 +135,7 @@ st.markdown('## Step 1 : User Input Transcript')
 st.markdown('Copy sample transcript [here](https://github.com/lihuicham/standup-comedy-analysis/blob/main/main/sample.txt). You can click the copy icon to copy the text !')
 user_input = st.text_area('Input the comedy transcript you would like to predict :', height=300)
 user_input = ' '.join(user_input.split('\n'))
+st.write(user_input)
 st.markdown('**Press `ctrl/cmd + enter` to process input transcript for next step.**')
 st.markdown('*Note: There will be a SMOTE error below if you do not fill in the input script above !*')
 
@@ -152,8 +153,11 @@ X_train_filtered = pd.DataFrame(filtered_tfidf_matrix.toarray(), columns = full_
 X_train_filtered = X_train_filtered[full_features]
 y_train_filtered = filtered_transcripts_sent_df['Funniness']
 
-smote = SMOTE(k_neighbors = 1)
-X_train_sm, y_train_sm = smote.fit_resample(X_train_filtered, y_train_filtered)
+oversampler = RandomOverSampler(sampling_strategy = 'minority')
+X_train_sm, y_train_sm = oversampler.fit_resample(X_train_filtered, y_train_filtered)
+
+X_train_sm = X_train_filtered.copy()
+y_train_sm = y_train_filtered.copy()
 
 filtered_grad_clf = GradientBoostingClassifier(n_estimators = 40, learning_rate = 0.1, random_state = 0).fit(X_train_sm, y_train_sm)
 
