@@ -33,7 +33,7 @@ st.write('Your sentence\'s subjectivity score : ', sub_score_user(user_input))
 ## Sentiment Analysis of Transcripts 
 '''
 
-df_textblob = pd.read_pickle('/Users/lihuicham/Documents/GitHub/standup-comedy-analysis/st-files-dashboard/sentiments_textblob.pkl')
+df_textblob = pd.read_pickle('standup-comedy-analysis/st-files-dashboard/sentiments_textblob.pkl')
 st.dataframe(df_textblob.head())
 
 # scatterplot of polarity and subjectivity
