@@ -153,7 +153,7 @@ With more accurate predictions and more meaningful words, we chose the document-
 ## Exploratory Data Analysis (EDA) 
 
 1. Most Common Words in all transcripts. (frequency >= 150)
-2. Word Cloud for 6 random transcripts (cleaned data)
+2. Word Cloud for all transcripts (cleaned data)
 
 '''
 # EDA 1
@@ -173,24 +173,25 @@ st.plotly_chart(fig_most_common)
 
 # EDA 2
 # comment out first 
-# st.markdown('#### Word Cloud')
-# st.markdown('Transcripts are cleaned, no stopwords, no most common words and etc. Word cloud should be meaningful')
+st.markdown('#### Word Cloud')
+st.markdown('Transcripts are cleaned, no stopwords, no most common words and etc. Word cloud should be meaningful')
 
-# tf_matrix = pd.read_pickle('/Users/lihuicham/Documents/GitHub/standup-comedy-analysis/pickle/tfidf_stop.pkl')
-# tf_matrix = tf_matrix.transpose()
+sparse_tf_stop = pd.read_pickle('st-files-dashboard/sparse_tf_stop.pkl')
+tf_colnames = pd.read_pickle('st-files-dashboard/tf_colnames.pkl')
+tf_matrix = pd.DataFrame(sparse_tf_stop.toarray(), columns=tf_colnames)
+tf_matrix = tf_matrix.transpose()
 
-# transcript_num = st.slider('Select transcript to view word cloud : ', 0, 414, 60)
+transcript_num = st.slider('Select transcript to view word cloud : ', 0, 414, 60)
 
-# wc = WordCloud().generate_from_frequencies(tf_matrix[transcript_num])
+wc = WordCloud().generate_from_frequencies(tf_matrix[transcript_num])
 
-# fig_wc1, ax = plt.subplots(figsize = (12, 8))
-# ax.imshow(wc)
-# plt.axis("off")
+fig_wc1, ax = plt.subplots(figsize = (12, 8))
+ax.imshow(wc)
+plt.axis("off")
 
-# st.write('You are viewing transcript ', transcript_num)
-# st.write(df.loc[df.index[transcript_num]])
-# st.pyplot(fig_wc1)
-
+st.write('You are viewing transcript ', transcript_num)
+st.write(df.loc[df.index[transcript_num]])
+st.pyplot(fig_wc1)
 
 
 
