@@ -175,7 +175,9 @@ st.plotly_chart(fig_most_common)
 st.markdown('#### Word Cloud')
 st.markdown('Transcripts are cleaned, no stopwords, no most common words and etc. Word cloud should be meaningful')
 
-tf_matrix = pd.read_pickle('/Users/lihuicham/Documents/GitHub/standup-comedy-analysis/pickle/tfidf_stop.pkl')
+sparse_tf_stop = pd.read_pickle('/Users/lihuicham/Documents/GitHub/standup-comedy-analysis/st-files-dashboard/sparse_tf_stop.pkl')
+tf_colnames = pd.read_pickle('/Users/lihuicham/Documents/GitHub/standup-comedy-analysis/st-files-dashboard/tf_colnames.pkl')
+tf_matrix = pd.DataFrame(sparse_tf_stop.toarray(), columns=tf_colnames)
 tf_matrix = tf_matrix.transpose()
 
 transcript_num = st.slider('Select transcript to view word cloud : ', 0, 414, 60)
