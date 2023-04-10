@@ -12,8 +12,7 @@ from empath import Empath
 import numpy as np
 from imblearn.over_sampling import SMOTE
 import nltk 
-nltk.download('punkt')
-nltk.download('stopwords')
+nltk.download('all')
 
 ## helper functions from pipeline_functions.py
 def clean_text(text) :
