@@ -129,15 +129,31 @@ def preprocess(doc):
     return final_text
     
 '''
-# Demo 
+# Project Demo 
+
+## Step 1 : User Input Transcript 
+We ran the demo steps below with the sample transcript shown below. 
+However, you can copy any transcripts from [this directory](https://github.com/lihuicham/standup-comedy-analysis/blob/main/main/sample.txt), 
+[this comedy script website](https://www.icomedytv.com/comedy-scripts/funny/humorous/comedy-monologues) or 
+input your own transcripts in the **multiline text area** below.  
+
+Steps to copy the transcript : 
+1. click into the `sample_transcripts` folder
+2. open any `*.txt` file 
+3. click the copy icon to copy
 '''
-st.markdown('## Step 1 : User Input Transcript')
-st.markdown('Copy sample transcript [here](https://github.com/lihuicham/standup-comedy-analysis/blob/main/main/sample.txt). You can click the copy icon to copy the text !')
-user_input = st.text_area('Input the comedy transcript you would like to predict :', height=300)
+
+user_input = st.text_input('Sample transcript used:', open('/Users/lihuicham/Documents/GitHub/standup-comedy-analysis/main/sample.txt', 'r').read())
+
+user_input_multiline = st.text_area('Input the comedy transcript you would like to predict :', height=300)
+st.markdown('**Press `ctrl/cmd + enter` to process your transcript !**')
+st.markdown('It generally takes a few seconds, depending on the length of the input transcript to process and generate the results.')
+
+if user_input_multiline != '' :
+    user_input = user_input_multiline
+
 user_input = ' '.join(user_input.split('\n'))
-st.write(user_input)
-st.markdown('**Press `ctrl/cmd + enter` to process input transcript for next step.**')
-st.markdown('*Note: There will be a SMOTE error below if you do not fill in the input script above !*')
+
 
 valid_transcripts_sent_df = pd.read_pickle('/Users/lihuicham/Documents/GitHub/standup-comedy-analysis/main/chloe_valid_transcripts_sent_df')
 valid_transcripts_df = pd.read_pickle('/Users/lihuicham/Documents/GitHub/standup-comedy-analysis/main/valid_transcripts_df')
@@ -269,7 +285,7 @@ st.dataframe(step4_df)
 
 
 '''
-## Step 5 : Topic Modelling 
+## Step 5 : Topic Modeling 
 We can do better than just predicting your level of funniness.  
 Let's look at the top 3 topics in your 10 chunks and the transcripts you are similar to. 
 '''

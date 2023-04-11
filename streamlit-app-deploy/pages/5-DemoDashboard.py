@@ -131,16 +131,31 @@ def preprocess(doc):
     return final_text
     
 '''
-# Demo 
+# Project Demo 
+
+## Step 1 : User Input Transcript 
+We ran the demo steps below with the sample transcript shown below. 
+However, you can copy any transcripts from [this directory](https://github.com/lihuicham/standup-comedy-analysis/tree/main/sample-transcripts), 
+[this comedy script website](https://www.icomedytv.com/comedy-scripts/funny/humorous/comedy-monologues) or 
+input your own transcripts in the **multiline text area** below.  
+
+Steps to copy the transcript : 
+1. click into the `sample_transcripts` folder
+2. open any `*.txt` file 
+3. click the copy icon to copy
 '''
-st.markdown('## Step 1 : User Input Transcript')
-st.markdown('Copy sample transcript [here](https://github.com/lihuicham/standup-comedy-analysis/blob/main/main/sample.txt). You can click the copy icon to copy the text !')
-user_input = st.text_area('Input the comedy transcript you would like to predict :', height=300)
+
+user_input = st.text_input('Sample transcript used:', open('main/sample.txt', 'r').read())
+
+user_input_multiline = st.text_area('Input the comedy transcript you would like to predict :', height=300)
+st.markdown('**Press `ctrl/cmd + enter` to process your transcript !**')
+st.markdown('It generally takes a few seconds, depending on the length of the input transcript to process and generate the results.')
+
+if user_input_multiline != '' :
+    user_input = user_input_multiline
+
 user_input = ' '.join(user_input.split('\n'))
-st.markdown('**Press `ctrl/cmd + enter` to process input transcript for next step.**')
-st.markdown('*Note: The warning below is a caching warning from the deployment app, you can ignore it.*')
-st.markdown('**Another Note : There will be an error below and you cannot see other steps of this dashboard if you do not fill in the input script above !**')
-st.markdown('Another another note : This multiline text area needs ctrl/cmd + enter to run, so it can only work on laptops, not mobile phones :(')
+
 
 @st.cache
 def load_sent() :
@@ -268,11 +283,11 @@ st.write(f'Your transcript is similar to {len(step2_df.index)} transcripts from 
 '''
 ## Step 3 : Model Training and Weighted Funniness Predictions 
 Before predicting the funniness level of your transcript, we need to train our model on your transcript.  
-Don't worry, no actions is needed here :) !!
+Don't worry, no action is needed here :) !!
 
 **What is going on behind the scene in this step ?**  
 From Step 2, we have a subset of similar transcripts. We use two models for a **weighted** funniness predictions.
-1. **Full model :** ML model trained on all transcripts. 
+1. **Full model :** ML model trained on all transcripts
 2. **Filtered model :** ML model trained on the subset of similar transcript
 
 Finally, the models are **ensembled and weighted.** 
@@ -289,7 +304,7 @@ st.dataframe(step4_df)
 
 
 '''
-## Step 5 : Topic Modelling 
+## Step 5 : Topic Modeling 
 We can do better than just predicting your level of funniness.  
 Let's look at the top 3 topics in your 10 chunks and the transcripts you are similar to. 
 '''
