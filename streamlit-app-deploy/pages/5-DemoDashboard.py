@@ -169,7 +169,7 @@ def load_features() :
 
 full_grad_clf = load_grad()
 loaded_full_vectorizer = load_vectorizer()
-full_vectorizer = loaded_full_vectorizer
+full_vectorizer = loaded_full_vectorizer.copy()
 full_features = load_features()
 
 filtered_tfidf_matrix = full_vectorizer.transform(filtered_transcripts_sent_df['Processed Transcript'])
