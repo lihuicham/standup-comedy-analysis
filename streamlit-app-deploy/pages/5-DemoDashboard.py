@@ -160,7 +160,7 @@ def load_grad() :
     return pd.read_pickle('main/trained_grad_model')
 
 @st.cache
-def load_vectorizer() :
+def load_vectorizer(allow_output_mutation=True) :
     return pd.read_pickle('main/full_vectorizer')
 
 @st.cache

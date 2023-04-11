@@ -5,7 +5,7 @@ import pandas as pd
 # Performance Evaluation 
 
 We trained `MultinomialNB`, `Logistic Regression`, `Random Forest`, `Adaboost`, 
-`Gradient Boost` and `XGBoost` models and predict them. Below is the performance comparison 
+`Gradient Boost`, `XGBoost`, `Voting (RF + ADA + GB)` models and predict them. Below is the performance comparison 
 between models. 
 '''
 @st.cache
