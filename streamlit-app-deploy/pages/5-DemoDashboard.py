@@ -160,7 +160,7 @@ def load_grad() :
     return pd.read_pickle('main/trained_grad_model')
 
 @st.cache
-def load_vectorizer(allow_output_mutation=True) :
+def load_vectorizer() :
     return pd.read_pickle('main/full_vectorizer')
 
 @st.cache
@@ -168,7 +168,8 @@ def load_features() :
     return pd.read_pickle('main/full_features')
 
 full_grad_clf = load_grad()
-full_vectorizer = load_vectorizer()
+loaded_full_vectorizer = load_vectorizer()
+full_vectorizer = loaded_full_vectorizer
 full_features = load_features()
 
 filtered_tfidf_matrix = full_vectorizer.transform(filtered_transcripts_sent_df['Processed Transcript'])
